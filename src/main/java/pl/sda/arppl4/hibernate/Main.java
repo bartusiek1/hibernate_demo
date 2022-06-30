@@ -1,34 +1,43 @@
 package pl.sda.arppl4.hibernate;
 
-import org.hibernate.Session;
-import org.hibernate.SessionException;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import pl.sda.arppl4.hibernate.dao.StudentDao;
+import pl.sda.arppl4.hibernate.model.Student;
+
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
-
         // tworzymy narzędzie do konfiguracji hibernate
-        HibernateUtil util = new HibernateUtil();
+     Student student = new Student(null, "Pawel", "Gawel", "123", LocalDate.now());
 
-        // załaduj konfigurację hibernate.cfg.xml
-        util.loadConfiguration();
+        // Tworzymy DATA ACCESS OBJECT
+        StudentDao dao = new StudentDao();
 
-        Student student = new Student (null, "Paweł", "Gaweł", "123", LocalDate.now());
+       dao.dodajStudenta(student);
 
-        SessionFactory fabrykaPoloczen = util.getSessionFactory();
+//        List<Student> lista = dao.zwrocListeStudentow();
+//        System.out.println("Studenci: " + lista);
+//
+//        for (Student studencik : lista) {
+//            if (studencik.getId() == 4) {
+//                lista.remove(studencik);
+//                dao.usunStudenta(studencik);
+//                break;
+//            }
+//        }
 
-        Session session = null;
-        try {
-            session = fabrykaPoloczen.openSession();
-            Transaction transaction = session.beginTransaction();
-            session.save(student);
-            transaction.commit();
-            session.close();
-        } catch (SessionException sessionException) {
+        Optional<Student> optionalStudent = dao.zwrocStudenta(3L);
+        if (optionalStudent.isPresent()) {
+//            Student studentAktualizowany = new Student(3L, "Gawełek", "Pawełek", "555", LocalDate.now());
+            Student studentAktualizowany = optionalStudent.get();
+            studentAktualizowany.setName("Gawełek");
+            studentAktualizowany.setSurname("Pawełek");
+            studentAktualizowany.setIndexNumber("555");
 
+            dao.updateStudent(studentAktualizowany);
         }
+
     }
 }

@@ -15,7 +15,7 @@
         <!-- hbm2ddl - Hibernate Model to Data Definition Language -->
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="pl.sda.arppl4.hibernate.Student"/>
+        <mapping class="pl.sda.arppl4.hibernate.model.Student"/>
 
     </session-factory>
 </hibernate-configuration>
