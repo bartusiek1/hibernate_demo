@@ -32,6 +32,8 @@ public class HibernateUtil {
 
     public SessionFactory sessionFactory;
 
+    // To jest taka łądowarka naszej konfiguracji
+
     private HibernateUtil() {
         loadConfiguration();
     }

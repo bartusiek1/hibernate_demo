@@ -26,5 +26,5 @@ public class Student {
     private String name;
     private String surname;
     private String indexNumber; // niegdy nie wolno nam zastosować samego słowa "index"
-    private LocalDate birthDate;
+    private String birthDate;
 }

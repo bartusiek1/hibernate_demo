@@ -6,16 +6,17 @@ import pl.sda.arppl4.hibernate.model.Student;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         // tworzymy narzędzie do konfiguracji hibernate
-     Student student = new Student(null, "Pawel", "Gawel", "123", LocalDate.now());
+ //    Student student = new Student(null, "Pawel", "Gawel", "123", LocalDate.now());
 
         // Tworzymy DATA ACCESS OBJECT
-        StudentDao dao = new StudentDao();
+  //      StudentDao dao = new StudentDao();
 
-       dao.dodajStudenta(student);
+  //     dao.dodajStudenta(student);
 
 //        List<Student> lista = dao.zwrocListeStudentow();
 //        System.out.println("Studenci: " + lista);
@@ -28,16 +29,20 @@ public class Main {
 //            }
 //        }
 
-        Optional<Student> optionalStudent = dao.zwrocStudenta(3L);
-        if (optionalStudent.isPresent()) {
+      //  Optional<Student> optionalStudent = dao.zwrocStudenta(3L);
+      //  if (optionalStudent.isPresent()) {
 //            Student studentAktualizowany = new Student(3L, "Gawełek", "Pawełek", "555", LocalDate.now());
-            Student studentAktualizowany = optionalStudent.get();
-            studentAktualizowany.setName("Gawełek");
-            studentAktualizowany.setSurname("Pawełek");
-            studentAktualizowany.setIndexNumber("555");
+      //      Student studentAktualizowany = optionalStudent.get();
+     //       studentAktualizowany.setName("Gawełek");
+     //       studentAktualizowany.setSurname("Pawełek");
+      //      studentAktualizowany.setIndexNumber("555");
 
-            dao.updateStudent(studentAktualizowany);
+     //       dao.updateStudent(studentAktualizowany);
+
+        Scanner scanner = new Scanner(System.in);
+        StudentDao studentDao = new StudentDao();
+
+        Parser parser = new Parser(studentDao, scanner);
+        parser.dzialaj();
         }
-
     }
-}
